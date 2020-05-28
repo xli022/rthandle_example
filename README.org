@@ -1,0 +1,35 @@
+#+TITLE: rthandle_example
+#+OPTION: ^:{}
+
+青莲云私有云支持用户通过API订阅，或指定rabbitmq服务地址，获取实时数据，
+以方便客户根据需求定制功能。这个项目演示了如何从rabbitmq服务地址获取设
+备上报数据，设备在线事件，设备绑定和解绑事件，并向 amazon alexa 发送通
+知。
+
+目前功能尚未完善，仍缺少操作、配置、控制私有云的接口，部分实时数据，如
+设备绑定事件尚未提供。例子中使用直接操作数据库的方式，今后将修改为API，
+以方便权限控制，和功能迭代。
+
+* 编译
+
+#+BEGIN_SRC sh
+git clone git@github.com:qinglianyun/rthandle_example.git
+cd rthandle_example
+./build.sh
+#+END_SRC
+
+第一次编译会下载依赖，可能需要等待几分钟。
+一些依赖实在太大，没有使用全静态编译，需要在系统预先安装
+libmysqlclient，openssl 开发库。
+
+* 代码结构
+
+- vendor 目录是依赖库位置，编译时将自动下载。
+- src 是主要代码逻辑。
+  - main 程序入口
+  - parse_conf 配置文件解析
+  - upstream 订阅与获取实时数据
+  - handle 获取到实时数据后的处理
+  - qlydb 查询和操作私有云数据库，正式版将修改为API方式
+
+消息流的使用请参考 《青莲云 amqp 消息流结构》。
