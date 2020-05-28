@@ -16,6 +16,8 @@
 git clone git@github.com:qinglianyun/rthandle_example.git
 cd rthandle_example
 ./build.sh
+
+# ./_build/rthandle ./example_rthandle.conf
 #+END_SRC
 
 第一次编译会下载依赖，可能需要等待几分钟。
