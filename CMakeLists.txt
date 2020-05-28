@@ -44,7 +44,6 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 find_package(Threads REQUIRED)  
 
-#set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL)
 
 set(VENDOR_TMP_DEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/_tmp/dest)
@@ -66,13 +65,10 @@ set(SM_CC_ARGS
     -Wextra
     -pedantic
     -Werror)
-# mysql-cpp is suck
+
 target_compile_options(rthandle PRIVATE ${SM_CC_ARGS})
 target_link_libraries(rthandle ${VENDOR_SPDLOG})
 target_link_libraries(rthandle ${VENDOR_MYSQLCPP})
 target_link_libraries(rthandle ${VENDOR_RABBITMQ})
 target_link_libraries(rthandle Threads::Threads)
 target_link_libraries(rthandle crypto ssl resolv mysqlclient)
-
-#set_target_properties(rthandle PROPERTIES LINK_SEARCH_START_STATIC 1)
-#set_target_properties(rthandle PROPERTIES LINK_SEARCH_END_STATIC 1)
