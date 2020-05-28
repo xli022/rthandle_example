@@ -1,0 +1,15 @@
+/out
+/build
+/extern_build
+/extern_src
+/.vs
+/.vscode
+/CMakeSettings.json
+# ctags
+/TAGS
+/ctags
+/tags
+/bazel-*
+/vendor/_tmp
+/_build
+/rthandle.conf
