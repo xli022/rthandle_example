@@ -49,7 +49,6 @@ find_package(OpenSSL)
 set(VENDOR_TMP_DEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/_tmp/dest)
 include_directories(${VENDOR_TMP_DEST_DIR}/include)
 set(VENDOR_SPDLOG ${VENDOR_TMP_DEST_DIR}/lib/libspdlog.a)
-set(VENDOR_MYSQLCPP ${VENDOR_TMP_DEST_DIR}/lib64/libmysqlcppconn8-static.a)
 set(VENDOR_RABBITMQ ${VENDOR_TMP_DEST_DIR}/lib64/librabbitmq.a)
 
 file(GLOB
@@ -68,7 +67,6 @@ set(SM_CC_ARGS
 
 target_compile_options(rthandle PRIVATE ${SM_CC_ARGS})
 target_link_libraries(rthandle ${VENDOR_SPDLOG})
-target_link_libraries(rthandle ${VENDOR_MYSQLCPP})
 target_link_libraries(rthandle ${VENDOR_RABBITMQ})
 target_link_libraries(rthandle Threads::Threads)
 target_link_libraries(rthandle crypto ssl resolv mysqlclient)
