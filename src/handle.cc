@@ -14,7 +14,8 @@ using json = nlohmann::json;
 
 namespace rthandle {
 
-MQHandle::MQHandle(int numthread, string cliid, string secret, DB* db)
+MQHandle::MQHandle(int numthread, const string& cliid, const string& secret,
+                   DB* db)
     : p_(numthread), azcliid_(cliid), azsecret_(secret), db_(db) {}
 MQHandle::~MQHandle() { p_.stop(); }
 
@@ -187,6 +188,8 @@ int MQHandle::RefreshToken(const int uid, const string& inrefresh,
   localtime_r(&exp_at, &tmt);
   char tbuf[30];
   strftime(tbuf, sizeof(tbuf), "%F %T", &tmt);
+  otoken = out_token;
+  orefresh = out_refresh;
   expire = string(tbuf);
   if (out_token.size()) {
     db_->SetAmzToken(uid, clid, out_token, out_refresh, expire);
@@ -260,6 +263,9 @@ int MQHandle::DpAlexaStateReport(const string& endpoint_id, const string& token,
 )";
   auto bodyjs = json::parse(body);
   bodyjs["event"]["endpoint"]["scope"]["token"] = token;
+  bodyjs["event"]["endpoint"]["endpointId"] = endpoint_id;
+
+  LOG_DEBUG("status={}", status);
 
   /*
     North America: https://api.amazonalexa.com/v3/events

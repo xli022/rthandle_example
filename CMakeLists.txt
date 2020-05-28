@@ -67,7 +67,7 @@ set(SM_CC_ARGS
     -pedantic
     -Werror)
 # mysql-cpp is suck
-# target_compile_options(rthandle PRIVATE ${SM_CC_ARGS})
+target_compile_options(rthandle PRIVATE ${SM_CC_ARGS})
 target_link_libraries(rthandle ${VENDOR_SPDLOG})
 target_link_libraries(rthandle ${VENDOR_MYSQLCPP})
 target_link_libraries(rthandle ${VENDOR_RABBITMQ})

@@ -8,7 +8,8 @@ namespace rthandle {
 
 class MQHandle {
  public:
-  MQHandle(int numthread, std::string cliid, std::string secret, DB* db);
+  MQHandle(int numthread, const std::string& cliid, const std::string& secret,
+           DB* db);
   virtual ~MQHandle();
   virtual void Serve(const std::string& topic, const std::string& content);
 
@@ -28,10 +29,11 @@ class MQHandle {
   virtual int DpAlexaStateReport(const std::string& endpoint_id,
                                  const std::string& token, const int status);
 
+  ctpl::thread_pool p_;
+
   std::string azcliid_;
   std::string azsecret_;
 
-  ctpl::thread_pool p_;
   DB* db_;
 };
 
