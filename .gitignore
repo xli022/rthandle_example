@@ -13,3 +13,4 @@
 /vendor/_tmp
 /_build
 /rthandle.conf
+/src/version.c
